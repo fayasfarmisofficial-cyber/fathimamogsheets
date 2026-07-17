@@ -62,6 +62,7 @@ function makeCell(row, field, type) {
   td.addEventListener('focus', () => {
     originalValue = td.textContent.trim()
     td.style.background = ''
+    td.style.color = ''
   })
 
   td.addEventListener('keydown', (e) => {
@@ -128,16 +129,19 @@ export function applyFormatting() {
       if (field === 'marks') {
         if (document.activeElement === td) return
         if (row.marks < 40) {
-          td.style.background = 'var(--color-marks-low)'
+          td.style.background = 'var(--marks-low-bg)'
+          td.style.color = 'var(--marks-low-text)'
         } else if (row.marks >= topThreshold) {
-          td.style.background = 'var(--color-marks-top)'
+          td.style.background = 'var(--marks-top-bg)'
+          td.style.color = 'var(--marks-top-text)'
         } else {
           td.style.background = ''
+          td.style.color = ''
         }
       } else if (field === 'sales') {
         if (document.activeElement === td) return
         const pct = Math.round((row.sales / maxSales) * 100)
-        td.style.background = `linear-gradient(to right, var(--color-sales-bar) ${pct}%, transparent ${pct}%)`
+        td.style.background = `linear-gradient(to right, var(--sales-bar) ${pct}%, transparent ${pct}%)`
       }
     })
   })
